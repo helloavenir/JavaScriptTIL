@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>끝말잇기</title>  
+</head>
+<body>
+  <div><span id="order">1</span>번째 참가자</div>
+  <div>제시어: <span id="word"></span></div>
+  <input type="text" />
+  <button>입력</button>
+  <!-- <button class="hello">버튼2</button> -->
+  <!-- <button class="hello">버튼3</button> -->
+
+  <script>
+    //  const number = prompt('몇 명이 참가하나요?');
+  
+    // 저장된 값(수)를 콘솔에서 확인해 볼 수 있음
+    // console.log('number', number);
+
+    // 문자열로 저장된 입력값 number를 숫자로 변환해줘야 함
+    // const realNumber = Number(number);
+
+    // 아니면 (주석처리한) 위의 내용을 한줄로도 표현 가능
+    const realNumber = Number(prompt('몇 명이 참가하나요?'));
+  
+    // confirm 함수 실습해 봄
+    // const yesOrNo =confirm('확인이나 취소를 눌러보세요');
+    // console.log(yesOrNo);
+
+    // HTML 태그를 자바스크립트에 불러와서 input을 콘솔 창에서 보고
+    // 콘솔 창에 보여지는 태그는 마우스를 올리면 실제 HTML 화면에서 하이라이트 됨
+    // 태그 저장 변수명은 $를 앞에 붙여보겠다.
+    const $input = document.querySelector('input');
+    // console.log($input);
+
+    // const $button = document.querySelectorAll('button');
+    // console.log($button);
+
+    // 입력창에 입력하는 단어, 변수에 저장
+    const $word = document.querySelector('#word');
+
+    // 몇 번째 참가자인지, 변수에 저장
+    const $order =document.querySelector('#order');
+
+    // ID 이름 order를 가진 태그 선택
+    // const $order = document.querySelector('#order');
+    // console.log($order);
+
+    // class 이름 hello를 가진 태그들 선택
+    // const $buttons = document.querySelectorAll('.hello');
+    // console.log($buttons);
+
+    // 제시어를 저장할 변수
+    // 사람들이 입력할 때마다 다르므로, const대신 let으로 선언
+    // 선언했을 때는 값이 없으므로 word = undefined -> false로 취급됨
+    let word;
+    // 참가자가 입력한 단어를 저장할 변수, 현재 단어
+    let newWord;
+    
+
+    // 선택자 태그 button에 이벤트가 발생하면 
+    // 이벤트 이름과 설정한 리스너함수가 실행된다. 
+    const onClickButton = () => {
+    
+      /* if (!word) { 
+        // 현재(입력한) 단어가 제시어가 된다.
+        word = newWord;
+        
+        // 화면에 제시어 표시, 태그 내부의 값을 얻거나 수정할 때 사용
+        // textContent는 무조건 문자열로 나오므로 빈 값인 null이나 undefined이 아니라
+        // ''이 나온다! 
+        $word.textContent = word;
+        // 입력창을 빈칸으로 만든다(빈 문자열을 입력한다)
+        $input.value = ''
+        const order = Number($order.textContent);
+          if (order + 1 > number) {
+            $order.textContent = 1;
+          }
+          else {
+            $order.textContent = order + 1;
+          }
+          $input.value = '';
+          $input.focus();
+        }  */    
+      // 와
+
+      /* else {  // 비어 있지 않다.
+          if(word[word.length - 1] === newWord[0]) {
+            word = newWord;
+            $word.textContent = word;    // 화면에 제시어 표시
+            // prompt로 받았으므로 숫자형 변환해 저장 
+            const order = Number($order.textContent);
+            if (order + 1 > number) {
+              $order.textContent = 1;
+            }
+            else {
+              $order.textContent = order + 1;
+            }
+            $input.value = '';
+            $input.focus();
+          }  */
+
+        // 가 중복되는 부분이 많으므로
+        // 다음과 같이 최적화(압축)할 수 있다.
+
+        
+      if (!word || word[word.length - 1] === newWord[0]) {
+        word = newWord;
+        $word.textContent = word;    
+        const order = Number($order.textContent);
+        if (order + 1 > number) {
+          $order.textContent = 1;
+        }
+        else {
+          $order.textContent = order + 1;
+        }
+      }
+      else {  // 올바르지 않다.
+          alert('올바르지 않은 단어입니다!');          
+      }  
+      $input.value = '';
+      $input.focus();    
+    };
+    // const $button2 = document.querySelector('button');
+    $button.addEventListener('click', onClickButton);
+
+    // 변수를 사용하는 대신 다음과 같이 한 번에 코딩할 수 있다.
+    // 하지만, 변수를 사용하는 것이 읽기가 더 쉽고 
+    // 변수를 재사용할 수 있어 변수 사용을 추천
+    // document.querySelector('button').addEventListener('click', () => {
+    // console.log('버튼 클릭');
+    // });
+      
+    
+    // onInput 함수는 매개변수로 event가 존재한다. 
+    // 다른 이름으로 지어도 됨. 그러나 보통 event로 이름 지음
+    // -> 매개변수로 이벤트에 관한 정보가 제공,
+    // 매개변수로 event 객체를 제공해서 이벤트와 관련된 정보를 얻어 옴
+    const onInput = (event) => {
+      // event.target.value는 입력된 값을 얻어오고,
+      // event.target은 이벤트가 발생한 대상 태그를 가리킴
+      // console.log('글자 입력', event.target.value);
+      newWord = event.target.value; // 입력하는 단어를 현재 단어로
+    };
+    // const $input2 = document.querySelector('input');
+    $input.addEventListener('input', onInput);
+
+    
+
+
+  </script>
+  
+</body>
+</html>

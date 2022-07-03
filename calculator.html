@@ -1,0 +1,144 @@
+<html>
+  <head>
+    <meta charset="utf-8"  />
+    <title>계산기 만들기</title>
+    <style>
+      * {
+        border-style: border-box;
+      }
+      #result {
+        width: 180px;
+        height: 50px;
+        margin: 5px;
+        text-align: right;
+      }
+      #op {
+        width: 50px;
+        height: 50px;
+        margin: 5px;
+        text-align: center;
+      }
+      button {
+        width: 50px;
+        height: 50px;
+        margin: 5px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div>
+      <input readonly id="op" />
+      <input readonly type="number" id="result" />
+      <div class="row">
+        <button id="num-7">7</button>
+        <button id="num-8">8</button>
+        <button id="num-9">9</button>
+        <button id="plus">+</button>
+      </div>
+      <div class="row">
+        <button id="num-4">4</button>
+        <button id="num-5">5</button>
+        <button id="num-6">6</button>
+        <button id="minus">-</button>
+      </div>
+      <div class="row">
+        <button id="num-1">1</button>
+        <button id="num-2">2</button>
+        <button id="num-3">4</button>
+        <button id="divide">/</button>
+      </div>
+      <div class="row">
+        <button id="clear">C</button>
+        <button id="num-0">0</button>
+        <button id="calculate">=</button>
+        <button id="multiply">/</button>
+      
+    <script>
+      let num1 = '';
+      let op = '';
+      let num2 = '';
+      const $op = document.querySelector('#op');
+      const $result = document.querySelector('#result');
+      /* document.querySelector('#num-0').addEventListener('click', () => {
+        // 연산자가 참이면(연산자에 값이 들어 있으면)
+        if (op) {
+        // num2에 0을 입력(숫자이지만 문자열로 자동변환할거니까 그냥 씀)
+          num2 += 0;
+        } else {
+          num1 += 0;
+        }
+        $result.value += '0';
+        // 연산자에 값이 들어 있지 않으면,(num1을 의미하는 숫자일 때니까)
+      });
+      document.querySelector('#num-1').addEventListener('click', () => {});
+      document.querySelector('#num-2').addEventListener('click', () => {});
+      document.querySelector('#num-3').addEventListener('click', () => {});
+      document.querySelector('#num-4').addEventListener('click', () => {});
+      document.querySelector('#num-5').addEventListener('click', () => {});
+      document.querySelector('#num-6').addEventListener('click', () => {});
+      document.querySelector('#num-7').addEventListener('click', () => {});
+      document.querySelector('#num-8').addEventListener('click', () => {});
+      document.querySelector('#num-9').addEventListener('click', () => {});
+      document.querySelector('#plus').addEventListener('click', () => {});
+      document.querySelector('#minus').addEventListener('click', () => {});
+      document.querySelector('#divide').addEventListener('click', () => {});
+      document.querySelector('#multiply').addEventListener('click', () => {});
+      document.querySelector('#calculate').addEventListener('click', () => {});
+      document.querySelector('#clear').addEventListener('click', () => {}); */
+// 위와 같이 반복되는 과정을 최적화하여 아래에 다시 작성
+      
+      const onClickNumber = (number) => // {   //중괄호와 다음에 나오는 return이 나오면 생략가능
+        /* // 연산자가 참이면(연산자에 값이 들어 있으면)
+        if (op) {
+        // num2에 클릭한 숫자를 입력(숫자이지만 문자열로 자동변환할거니까 그냥 씀)
+          num2 += number;
+        } else {
+          num1 += number;
+        }
+        $result.value += number; */
+
+        // addEventListener의 매개변수 두번째 자리에 함수가 나와야 하는데
+        // return 값이 없어 undefined를 반환하니
+        // 함수 자리에 undefined를 넣은 게 되므로
+        // 두번째 자리에 나와있는 형식대로 return값은 함수 형식으로 만들어 맞춰준다.
+        
+        // return   //생략해서 함수가 연달아 나오는 모습, 함수가 함수를 리턴하는 모습(고차함수)
+        (event) => {
+          if (op) {
+        // num2에 클릭한 숫자를 입력(숫자이지만 문자열로 자동변환할거니까 그냥 씀)
+          num2 += number;
+          } else {
+            num1 += number;
+          }
+          $result.value += number;
+        };
+        // return값으로의 함수 안에 비어있기 때문에 위의 식을 이 함수 안에 작성한다.
+        
+      document.querySelector('#num-0').addEventListener('click', onClickNumber(0));
+      document.querySelector('#num-1').addEventListener('click', onClickNumber(1));
+      document.querySelector('#num-2').addEventListener('click', onClickNumber(2));
+      document.querySelector('#num-3').addEventListener('click', onClickNumber(3));
+      document.querySelector('#num-4').addEventListener('click', onClickNumber(4));
+      document.querySelector('#num-5').addEventListener('click', onClickNumber(5));
+      document.querySelector('#num-6').addEventListener('click', onClickNumber(6));
+      document.querySelector('#num-7').addEventListener('click', onClickNumber(7));
+      document.querySelector('#num-8').addEventListener('click', onClickNumber(8));
+      document.querySelector('#num-9').addEventListener('click', onClickNumber(9));
+
+      const onClickOperator = (operate) => () => {
+        // num1값이 존재하면
+        if (num1) {
+          op = operate;
+          $op.value = operate;
+        } else {
+          alert('숫자를 먼저 입력하세요.');
+        }
+      }
+
+
+
+    </script>
+  </body>
+
+</html>
